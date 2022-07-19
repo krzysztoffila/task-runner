@@ -48,6 +48,65 @@
         core.autocrlf = true</code></pre>
     </div>
   </div>
+  <div id="config-stylelint" class="tab-pane card fade" aria-expanded="false">
+    <div class="card-block">
+      <h4>StyleLint</h4>
+      <p>To bardzo podobne narzędzie do ESLinta – jednak zamiast JS, będzie sprawdzać nasze style, a konkretniej pliki w
+        katalogu <code>sass</code>.</p>
+      <p>Konfiguracja <code>.stylelintrc.json</code>, którą za chwilę zapiszemy, zawiera m.in. następujące zasady:</p>
+      <ul>
+        <li>poprawne formatowanie, zgodne z tym ustawionym w EditorConfig (wcięcia, zakończenia linii),</li>
+        <li>wymagana spacja po dwukropku,</li>
+        <li>wymagana nowa linia po średniku,</li>
+        <li>nie więcej niż dwie puste linie bezpośrednio po sobie,</li>
+        <li>maksymalne zagnieżdżenie 4 poziomów (nie licząc pseudoklas),</li>
+        <li>nie używamy znaku <code>&amp;</code> bez potrzeby,</li>
+        <li>nie definiujemy wielokrotnie tej samej zmiennej.</li>
+      </ul>
+      <h5>Zmiany w task runnerze</h5>
+      <p>Aby używać ESLinta, potrzebujemy wprowadzić jeszcze parę zmian w naszym task runnerze. Otwórz plik
+        <code>package.json</code> i pod taskiem <code>test:js</code> (dodanym przy konfiguracji ESLinta) dodaj
+        następującą linię:</p>
+      <pre class="  language-plaintext"><code class="  language-plaintext">"test:scss": "stylelint sass/",</code></pre>
+      <h5>Instalacja</h5>
+      <p>Zainstaluj pakiety <code>stylelint</code> i <code>stylelint-scss</code> za pomocą komendy:</p>
+      <pre
+        class="  language-plaintext"><code class="  language-plaintext">npm install --save-dev stylelint stylelint-scss</code></pre>
+      <p>W katalogu swojego projektu stwórz nowy plik <code>.stylelintrc.json</code> i wklej poniższą zawartość:</p>
+      <pre class="  language-json"><code class="  language-json"><span class="token punctuation">{</span>
+      <span class="token property">"plugins"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"stylelint-scss"</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token property">"rules"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"block-no-empty"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token property">"color-no-invalid-hex"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token property">"comment-empty-line-before"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+        <span class="token property">"declaration-colon-space-after"</span><span class="token operator">:</span> <span class="token string">"always"</span><span class="token punctuation">,</span>
+        <span class="token property">"declaration-block-semicolon-newline-after"</span><span class="token operator">:</span> <span class="token string">"always"</span><span class="token punctuation">,</span>
+        <span class="token property">"declaration-block-trailing-semicolon"</span><span class="token operator">:</span> <span class="token string">"always"</span><span class="token punctuation">,</span>
+        <span class="token property">"indentation"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+        <span class="token property">"max-empty-lines"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+        <span class="token property">"max-nesting-depth"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+          <span class="token property">"ignore"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"pseudo-classes"</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">"rule-empty-line-before"</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token string">"always"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+          <span class="token property">"except"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"first-nested"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token property">"ignore"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"after-comment"</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">"unit-whitelist"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+        <span class="token property">"scss/at-extend-no-missing-placeholder"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token property">"scss/selector-no-redundant-nesting-selector"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token property">"scss/no-duplicate-dollar-variables"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token property">"scss/no-global-function-names"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span></code></pre>
+      <h5>Uruchomienie StyleLinta</h5>
+      <p>Uruchom teraz <code>npm run test:scss</code>, aby sprawdzić, czy Twój kod spełnia te zasady. Jeśli pojawią się
+        jakieś błędy, napraw je w swoich plikach.</p>
+      <p>Podobnie jak przy ESLint, sprawdzane będą tylko pliki w katalogu <code>sass</code>. Jeśli używasz jakichś
+        bibliotek, umieszczaj ich pliki <em>.css</em> w katalogu <code>vendor</code>.</p>
+    </div>
+  </div>
 
 
 
