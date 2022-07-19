@@ -1,12 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
+
 <body>
-    
+  <div id="config-editorconfig" class="tab-pane card fade" aria-expanded="false">
+    <div class="card-block">
+      <h4>EditorConfig</h4>
+      <p>Dzięki plikowi <code>.editorconfig</code>, który za chwilę stworzymy, Twój edytor kodu może automatycznie
+        stosować spójne formatowanie kodu we wszystkich plikach. W tym pliku zapisanych jest kilka zasad, takich
+        jak:</p>
+      <ul>
+        <li>stosowanie wcięć (<em>indentacji</em>) w postaci 2 spacji,</li>
+        <li>kodowanie pliku <em>utf-8</em> i unixowe zakończenia linii,</li>
+        <li>usuwanie spacji na końcu linii,</li>
+        <li>dodawanie pustej linii na końcu pliku.</li>
+      </ul>
+      <p>W najpopularniejszych edytorach kodu, takich jak <a href="https://code.visualstudio.com/"
+          target="_blank">Visual Studio Code</a>, <a href="https://www.sublimetext.com/" target="_blank">Sublime
+          Text</a>, <a href="https://www.jetbrains.com/phpstorm/" target="_blank">PhpStorm</a>/<a
+          href="https://www.jetbrains.com/webstorm/" target="_blank">WebStorm</a> czy <a
+          href="https://notepad-plus-plus.org/" target="_blank">Notepad++</a>, do korzystania z EditorConfig będzie
+        potrzebne zainstalowanie
+        wtyczki. Linki do instrukcji instalacji wtyczek znajdziesz <a href="https://editorconfig.org/#download"
+          target="_blank">na stronie EditorConfig</a>.</p>
+      <p>Jak poznać, że EditorConfig działa? Przejdź na koniec dowolnego pliku w swoim projekcie. Jeśli na końcu
+        pliku są jakieś puste linie, usuń je. Na końcu ostatniej linii pliku dodaj kilka spacji. Następnie
+        zapisz plik – jeśli wszystko działa poprawnie, spacje na końcu linii zostały usunięte, a na końcu pliku
+        została dodana pusta linia.</p>
+      <p>Dzięki temu rozwiązaniu nie musisz pamiętać o poprawnym ustawieniu swojego edytora.</p>
+      <h5>Instalacja</h5>
+      <p>W katalogu swojego projektu stwórz nowy plik <code>.editorconfig</code> i wklej poniższą zawartość:</p>
+      <pre class="  language-plaintext"><code class="  language-plaintext">root = true
+
+        [*]
+        end_of_line = lf
+        charset = utf-8
+        indent_style = space
+        indent_size = 2
+        trim_trailing_whitespace = true
+        insert_final_newline = true
+        core.autocrlf = true</code></pre>
+    </div>
+  </div>
+
+
+
+
+
 </body>
+
 </html>
